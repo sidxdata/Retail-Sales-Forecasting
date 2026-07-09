@@ -42,13 +42,13 @@ Weekly sales data for 45 stores / 81 departments (2010–2012), including holida
 
 ## Model Results
 
-| Model | MAE | RMSE | %RMSE | R² |
+| Model | MAE | RMSE | %RMSE | R² | MAPE |
 |---|---|---|---|---|
 | **Random Forest (selected)** | **1,226.53** | **2,496.83** | **15.68%** | **0.987** |
 | XGBoost (Tuned) | 1,339.64 | 2,810.39 | 17.65% | 0.984 |
 | Decision Tree | 1,489.07 | 3,179.38 | 19.97% | 0.979 |
 | Linear Regression | 1,613.06 | 3,007.43 | 18.89% | 0.981 |
-| SARIMA (company-level baseline) | — | — | 3.36% | MAPE 2.67% |
+| SARIMA (company-level baseline) | — | — | 3.36% | - | 2.67% |
 
 **Random Forest** was selected as the final model — lowest error across every metric, with strong generalization from ensembled deep trees on a dataset dominated by one highly informative seasonal-lag feature.
 

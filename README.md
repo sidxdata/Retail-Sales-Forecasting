@@ -67,4 +67,4 @@ Run all cells top to bottom. Outputs (plots, metrics, `forecast_output.csv`) are
 
 ## Full Report
 
-See [REPORT.pdf](./Retail_Sales_Forecasting_Report_.pdf) for the executive summary, detailed insights, and business recommendations.
+See [Retail_Sales_Forecasting_Report_.pdf](./Retail_Sales_Forecasting_Report_.pdf) for the executive summary, detailed insights, and business recommendations.

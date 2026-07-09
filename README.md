@@ -10,10 +10,11 @@ A retail chain wants to improve demand planning and inventory allocation by fore
 
 ```
 .
-├── TimeSeriesAnalysis.ipynb      # Full analysis notebook (EDA → modeling → forecasts)
-├── clean_data.csv                # Source dataset (weekly sales, 2010–2012)
-├── forecast_output.csv           # Final predictions (Date, Store, Dept, Actual, Predicted)
-├── REPORT.pdf                    # Executive summary, insights & recommendations
+├── TimeSeriesAnalysis_2.ipynb      # Full analysis notebook (EDA → modeling → forecasts)
+├── clean_data.zip                  # Source dataset — unzip before running
+├── forecast_output.csv             # Final predictions (Date, Store, Dept, Actual, Predicted)
+├── REPORT.pdf                      # Executive summary, insights & recommendations
+├── requirements.txt
 └── README.md
 ```
 

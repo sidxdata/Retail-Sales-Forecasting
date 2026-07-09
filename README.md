@@ -66,4 +66,4 @@ Run all cells top to bottom. Outputs (plots, metrics, `forecast_output.csv`) are
 
 ## Full Report
 
-See [REPORT.md](./REPORT.md) for the executive summary, detailed insights, and business recommendations.
+See [REPORT.pdf](./REPORT.pdf) for the executive summary, detailed insights, and business recommendations.

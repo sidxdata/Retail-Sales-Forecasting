@@ -1,4 +1,4 @@
-# Retail Sales Forecasting — Walmart Weekly Sales Case Study
+# Retail Sales Forecasting — Case Study
 
 An end-to-end time series forecasting pipeline predicting weekly sales at the store/department level, built for a retail demand-planning use case. The project covers data understanding, EDA, feature engineering, statistical and machine learning forecasting models, model evaluation, and business recommendations.
 

@@ -260,10 +260,9 @@ The complete project report containing methodology, visualizations, model evalua
 
 **Siddharth Gupta**
 
-B.Tech (Geoinformatics) | Netaji Subhas University of Technology (NSUT)
+B.Tech | Netaji Subhas University of Technology (NSUT)
 
-- LinkedIn: *(Add your LinkedIn URL)*
-- GitHub: *(Add your GitHub URL)*
+- LinkedIn: *[(Add your LinkedIn URL)](https://www.linkedin.com/in/siddharth-gupta-16b829305/)*
 
 ---
 

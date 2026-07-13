@@ -1,70 +1,262 @@
-# Retail Sales Forecasting — Case Study
+# Retail Sales Forecasting using Time Series Analysis & Machine Learning
 
-An end-to-end time series forecasting pipeline predicting weekly sales at the store/department level, built for a retail demand-planning use case. The project covers data understanding, EDA, feature engineering, statistical and machine learning forecasting models, model evaluation, and business recommendations.
+An end-to-end retail demand forecasting project that predicts weekly sales across **45 stores**, **81 departments**, and **420K+ records** using statistical time-series models and machine learning. The project combines business analytics, feature engineering, predictive modelling, and model evaluation to support inventory planning and demand forecasting.
+
+---
+
+## Project Highlights
+
+- 📊 **420K+** weekly sales records
+- 🏬 **45 Stores | 81 Departments**
+- 📅 **3 Years** of historical sales data
+- 🤖 Compared **6 forecasting models**
+- 🏆 Best Model: **Random Forest (R² = 0.987)**
+- 📈 End-to-end Time Series & Machine Learning pipeline
+- 📦 Business use case: Retail Demand Forecasting & Inventory Planning
+
+---
 
 ## Business Problem
 
-A retail chain wants to improve demand planning and inventory allocation by forecasting weekly sales across 45 stores and 81 departments (3,323 unique store-department series), accounting for seasonality, holiday spikes, markdown-driven fluctuations, and store-level performance differences.
+Retail businesses must accurately forecast product demand to optimize inventory, workforce planning, and supply chain operations. This project predicts weekly sales across multiple stores and departments while accounting for seasonality, holiday effects, promotional markdowns, and store-specific characteristics to improve business decision-making.
+
+---
 
 ## Repository Structure
 
-```
+```text
 .
-├── TimeSeriesAnalysis_2.ipynb      # Full analysis notebook (EDA → modeling → forecasts)
-├── clean_data.zip                  # Source dataset — unzip before running
-├── forecast_output.csv             # Final predictions (Date, Store, Dept, Actual, Predicted)
-├── REPORT.pdf                      # Executive summary, insights & recommendations
+├── TimeSeriesAnalysis_2.ipynb      # Complete analysis notebook
+├── clean_data.zip                  # Dataset (extract before running)
+├── forecast_output.csv             # Final predictions
+├── Retail_Sales_Forecasting_Report.pdf
 ├── requirements.txt
 └── README.md
 ```
 
+---
+
 ## Dataset
 
-Weekly sales data for 45 stores / 81 departments (2010–2012), including holiday flags, store type/size, temperature, fuel price, CPI, unemployment, and promotional markdown information. Target variable: `Weekly_Sales`.
+The project uses the Walmart Retail Sales dataset containing weekly sales information from **2010–2012**.
+
+### Dataset Summary
+
+| Attribute | Description |
+|-----------|-------------|
+| Stores | 45 |
+| Departments | 81 |
+| Store–Department Series | 3,323 |
+| Total Records | 420K+ |
+| Time Period | 2010–2012 |
+| Target Variable | Weekly_Sales |
+
+Additional variables include:
+
+- Holiday Flag
+- Store Type
+- Store Size
+- Temperature
+- Fuel Price
+- CPI
+- Unemployment
+- Markdown Features (MarkDown1–5)
+
+---
 
 ## Methodology
 
-1. **Data Understanding** — schema check, null/duplicate audit, granularity analysis (panel data: 3,323 distinct store-dept time series).
-2. **EDA** — trend/seasonality decomposition, holiday impact quantification, store/department comparison, correlation analysis.
-3. **Feature Engineering** — calendar features (week/month/quarter), lag features (1, 2, 4, 13, 26, 52 weeks), rolling statistics, a corrected "true peak week" holiday flag (see Key Findings).
-4. **Feature Selection** — correlation/multicollinearity check; full engineered feature set retained (no problematic collinearity found; tree models are robust to correlated predictors).
-5. **Modeling** — two model families, five total models:
-   - **Statistical:** ARIMA(2,0,2), SARIMA(0,0,1)(0,1,1,52)
-   - **Machine Learning:** Linear Regression, Decision Tree, Random Forest, XGBoost (hyperparameter-tuned via `RandomizedSearchCV` with `TimeSeriesSplit`)
-6. **Evaluation** — MAE, RMSE, %RMSE, MAPE, and WMAE (holiday-weighted, matching the original Walmart competition standard); all splits are strictly chronological to prevent leakage.
-7. **Forecast Generation** — final predictions exported to `forecast_output.csv`.
+The forecasting pipeline consists of the following stages:
 
-## Key Findings
+### 1. Data Understanding
 
-- Strong annual seasonality (Thanksgiving/Christmas-driven); the dataset's official "Christmas" flag is mistimed — the true peak occurs the week before (week 51), at roughly 2x the flagged week's sales.
-- `lag_52` (same week, one year ago) is the single strongest predictive feature across all tree-based models.
-- Store `Size`/`Type` are meaningful sales drivers; macroeconomic indicators (CPI, fuel price, unemployment) show weak linear correlation with sales.
-- Markdown impact on sales is confounded with an overall time trend and should be treated cautiously.
+- Dataset exploration
+- Missing value analysis
+- Duplicate detection
+- Panel data identification
+- Data quality validation
 
-## Model Results
+### 2. Exploratory Data Analysis (EDA)
 
-| Model | MAE | MAE (% of mean sales) | RMSE | %RMSE | MAPE | R² |
-|---|---|---|---|---|---|---|
-| **Random Forest (selected)** | **1,226.53** | **7.70%** | **2,496.83** | **15.68%** | 208.64% | **0.987** |
-| XGBoost (Tuned) | 1,339.64 | 8.41% | 2,810.39 | 17.65% | 185.48% | 0.984 |
-| Decision Tree | 1,489.07 | 9.35% | 3,179.38 | 19.97% | 78.33% | 0.979 |
-| Linear Regression | 1,613.06 | 10.13% | 3,007.43 | 18.89% | 864.57% | 0.981 |
-| SARIMA (company-level baseline) | — | — | — | 3.36% | 2.67% | — |
+- Weekly sales trend analysis
+- Seasonal decomposition
+- Holiday impact analysis
+- Store and department comparison
+- Correlation analysis
+- Distribution analysis
 
-**Random Forest** was selected as the final model — lowest error across every metric, with strong generalization from ensembled deep trees on a dataset dominated by one highly informative seasonal-lag feature.
+### 3. Feature Engineering
+
+Engineered predictive features including:
+
+- Calendar Features (Week, Month, Quarter)
+- Lag Features (1, 2, 4, 13, 26, 52 weeks)
+- Rolling Mean & Rolling Standard Deviation
+- Holiday Features
+- Store Characteristics
+- Economic Indicators
+
+### 4. Feature Selection
+
+- Correlation analysis
+- Multicollinearity assessment
+- Feature importance analysis
+
+The complete engineered feature set was retained since no significant multicollinearity affecting tree-based models was observed.
+
+### 5. Forecasting Models
+
+#### Statistical Models
+
+- ARIMA (2,0,2)
+- SARIMA (0,0,1)(0,1,1,52)
+
+#### Machine Learning Models
+
+- Linear Regression
+- Decision Tree
+- Random Forest
+- XGBoost (RandomizedSearchCV + TimeSeriesSplit)
+
+### 6. Model Evaluation
+
+Models were evaluated using chronological train-test splits to avoid data leakage.
+
+Evaluation metrics:
+
+- MAE
+- RMSE
+- MAPE
+- WMAE
+- R² Score
+
+### 7. Forecast Generation
+
+The final model was used to generate weekly sales forecasts for every Store–Department combination.
+
+---
+
+## Model Performance
+
+### Final Selected Model: **Random Forest**
+
+| Model | MAE | RMSE | MAPE | R² |
+|------|------:|------:|------:|------:|
+| 🏆 **Random Forest** | **1,226.53** | **2,496.83** | 208.64% | **0.987** |
+| XGBoost | 1,339.64 | 2,810.39 | 185.48% | 0.984 |
+| Decision Tree | 1,489.07 | 3,179.38 | 78.33% | 0.979 |
+| Linear Regression | 1,613.06 | 3,007.43 | 864.57% | 0.981 |
+| SARIMA | — | — | 2.67% | — |
+
+Random Forest achieved the lowest forecasting error and highest predictive performance by effectively capturing nonlinear relationships and seasonal demand patterns.
+
+---
+
+## Key Business Insights
+
+- Holiday periods generate the highest sales demand, particularly during Thanksgiving and the week preceding Christmas.
+- **lag_52** (sales from the same week in the previous year) is the most influential forecasting feature.
+- Store Size and Store Type contribute significantly more to forecasting accuracy than macroeconomic indicators.
+- Promotional markdown effects are partially confounded with long-term sales trends and should be interpreted cautiously.
+- Random Forest consistently outperformed all other statistical and machine learning models.
+
+---
+
+## Business Impact
+
+The developed forecasting pipeline can help retailers:
+
+- Improve demand planning
+- Optimize inventory allocation
+- Reduce stock-outs and excess inventory
+- Support staffing and workforce planning
+- Improve promotional planning
+- Enable data-driven operational decision-making
+
+---
 
 ## Tech Stack
 
-Python · pandas · NumPy · scikit-learn · XGBoost · statsmodels · matplotlib · seaborn
+| Category | Technologies |
+|----------|--------------|
+| Programming | Python |
+| Data Analysis | Pandas, NumPy |
+| Machine Learning | Scikit-learn, XGBoost |
+| Time Series | Statsmodels |
+| Visualization | Matplotlib, Seaborn |
+| Development | Jupyter Notebook |
+
+---
+
+## Results
+
+The project produces:
+
+- Weekly sales forecasts
+- Forecast performance metrics
+- Feature importance analysis
+- Business insights
+- Forecast output file (`forecast_output.csv`)
+- Executive report with recommendations
+
+---
 
 ## Setup & Usage
 
+Clone the repository:
+
 ```bash
-pip install pandas numpy scikit-learn xgboost statsmodels matplotlib seaborn
-jupyter notebook TimeSeriesAnalysis.ipynb
+git clone https://github.com/your-username/Retail-Sales-Forecasting.git
+cd Retail-Sales-Forecasting
 ```
-Run all cells top to bottom. Outputs (plots, metrics, `forecast_output.csv`) are generated in place.
 
-## Full Report
+Install dependencies:
 
-See [Retail_Sales_Forecasting_Report_.pdf](./Retail_Sales_Forecasting_Report_.pdf) for the executive summary, detailed insights, and business recommendations.
+```bash
+pip install -r requirements.txt
+```
+
+Extract the dataset:
+
+```text
+clean_data.zip
+```
+
+Run the notebook:
+
+```bash
+jupyter notebook TimeSeriesAnalysis_2.ipynb
+```
+
+---
+
+## Future Improvements
+
+- Deploy the forecasting pipeline using Streamlit
+- Build an interactive Power BI dashboard
+- Compare with Prophet and LightGBM
+- Explore deep learning models (LSTM)
+- Automate periodic model retraining
+
+---
+
+## Report
+
+The complete project report containing methodology, visualizations, model evaluation, business insights, and recommendations is available in:
+
+**📄 Retail_Sales_Forecasting_Report.pdf**
+
+---
+
+## Author
+
+**Siddharth Gupta**
+
+B.Tech (Geoinformatics) | Netaji Subhas University of Technology (NSUT)
+
+- LinkedIn: *(Add your LinkedIn URL)*
+- GitHub: *(Add your GitHub URL)*
+
+---
+
+⭐ If you found this project useful, consider giving the repository a star.

@@ -138,17 +138,25 @@ The final model was used to generate weekly sales forecasts for every Store–De
 
 ## Model Performance
 
-### Final Selected Model: **Random Forest**
+### 🏆 Final Selected Model: **Random Forest**
 
-| Model | MAE | RMSE | MAPE | R² |
-|------|------:|------:|------:|------:|
-| 🏆 **Random Forest** | **1,226.53** | **2,496.83** | 208.64% | **0.987** |
-| XGBoost | 1,339.64 | 2,810.39 | 185.48% | 0.984 |
-| Decision Tree | 1,489.07 | 3,179.38 | 78.33% | 0.979 |
-| Linear Regression | 1,613.06 | 3,007.43 | 864.57% | 0.981 |
-| SARIMA | — | — | 2.67% | — |
+| Model | MAE | MAE (% of Mean Sales) | RMSE | %RMSE | MAPE | R² |
+|:------|----:|----------------------:|-----:|------:|-----:|---:|
+| 🏆 **Random Forest** | **1,226.53** | **7.70%** | **2,496.83** | **15.68%** | 208.64% | **0.987** |
+| XGBoost *(Tuned)* | 1,339.64 | 8.41% | 2,810.39 | 17.65% | 185.48% | 0.984 |
+| Decision Tree | 1,489.07 | 9.35% | 3,179.38 | 19.97% | 78.33% | 0.979 |
+| Linear Regression | 1,613.06 | 10.13% | 3,007.43 | 18.89% | 864.57% | 0.981 |
+| SARIMA *(Statistical Baseline)* | — | — | — | **3.36%** | **2.67%** | — |
 
-Random Forest achieved the lowest forecasting error and highest predictive performance by effectively capturing nonlinear relationships and seasonal demand patterns.
+> **Evaluation Metrics**
+>
+> - **MAE:** Mean Absolute Error
+> - **RMSE:** Root Mean Squared Error
+> - **%RMSE:** RMSE expressed as a percentage of mean sales
+> - **MAPE:** Mean Absolute Percentage Error
+> - **R²:** Coefficient of Determination
+>
+> **Random Forest** achieved the lowest forecasting error and the highest predictive performance among all evaluated machine learning models, making it the final model selected for demand forecasting. SARIMA served as the statistical forecasting baseline for comparison.
 
 ---
 

@@ -262,7 +262,7 @@ The complete project report containing methodology, visualizations, model evalua
 
 B.Tech | Netaji Subhas University of Technology (NSUT)
 
-- LinkedIn: *[(Add your LinkedIn URL)](https://www.linkedin.com/in/siddharth-gupta-16b829305/)*
+- LinkedIn: *(https://www.linkedin.com/in/siddharth-gupta-16b829305/)*
 
 ---
 
